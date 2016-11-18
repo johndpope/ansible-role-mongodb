@@ -1,0 +1,4 @@
+---
+rabbitmq_install: true
+rabbitmq_version: 3.6.5
+rabbitmq_build: 3.6.5-1
