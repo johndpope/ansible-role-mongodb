@@ -15,3 +15,21 @@
       update_cache: yes
       disable_gpg_check: yes
   when: mongodb_install and (ansible_pkg_mgr == "yum")
+
+- name: Install MongoDB Configuration
+  become: yes
+  template:
+      src: templates/mongod.conf.js
+      dest: /etc/mongod.conf
+      mode: 0444
+      backup: yes
+      force: yes
+  when: mongodb_install
+
+- name: Start MongoDB daemon
+  become: yes
+  service:
+      name: mongod
+      state: restarted
+      enabled: yes
+  when: mongodb_install

@@ -1,3 +1,9 @@
 ---
 mongodb_install: true
 mongodb_version: 3.4
+mongodb_storage_directory: /var/lib/mongo
+mongodb_log_directory: /var/log/mongodb
+mongodb_cache_size_gb: 1
+mongodb_profiling_mode: "off"
+mongodb_no_table_scan_mode: 0
+mongodb_port: 27017
