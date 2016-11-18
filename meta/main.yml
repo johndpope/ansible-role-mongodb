@@ -1,6 +1,6 @@
 galaxy_info:
   author: Ronald D. Kurr
-  description: RabbitMQ message broker.
+  description: MongoDB document database.
   company: jvmguy.com
 
   license: Apache 2
@@ -34,8 +34,8 @@ galaxy_info:
     - xenial
 
   galaxy_tags:
-      - rabbitmq
-      - amqp
+      - mongodb
+      - nosql
 
 dependencies:
     - { role: kurron.base }

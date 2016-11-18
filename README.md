@@ -1,7 +1,7 @@
 Role Name
 =========
 
-RabbitMQ server, initially targetted to RHEL.
+MongoDB server, initially targetted to RHEL.
 
 Requirements
 ------------
@@ -11,10 +11,7 @@ TODO
 Role Variables
 --------------
 
-* rabbitmq_install: true
-* rabbitmq_version: 3.6.5
-* rabbitmq_build: 3.6.5-1
-
+TODO
 Dependencies
 ------------
 
@@ -26,7 +23,7 @@ Example Playbook
 ```
 - hosts: servers
   roles:
-      - { role: kurron.rabbitmq }
+      - { role: kurron.mongodb }
 ```
 
 License
