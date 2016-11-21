@@ -26,11 +26,13 @@
       force: yes
   when: mongodb_install
 
-- name: Create MongoDB Process Directory
+- name: Create MongoDB Log Directory
   become: yes
   file:
-      path: "{{mongodb_process_directory}}"
+      path: "{{mongodb_log_directory}}"
       state: directory
+      owner: mongod
+      group: mongod
   when: mongodb_install
 
 - name: Start MongoDB daemon
