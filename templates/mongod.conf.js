@@ -11,7 +11,8 @@ systemLog:
 
 processManagement:
     fork: true
-    pidFilePath: "{{ mongodb_process_directory }}/mongod.pid"
+    # Not a mistake, we are using the log directory to store the PID file because /var/run/mongodb does not exist on fresh EC2 instances.
+    pidFilePath: "{{ mongodb_log_directory }}/mongod.pid"
 
 net:
     port: {{mongodb_port}}
