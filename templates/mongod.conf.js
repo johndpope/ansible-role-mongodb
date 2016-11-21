@@ -1,31 +1,22 @@
-storage:
-    dbPath: {{ mongodb_storage_directory }}
-    journal:
-        enabled: true
-    directoryPerDB: true
-    engine: wiredTiger
-    wiredTiger:
-        engineConfig:
-            cacheSizeGB: {{ mongodb_cache_size_gb }}
-            directoryForIndexes: true
+# Derived from https://docs.mongodb.com/manual/reference/configuration-options/
 
-operationProfiling:
-    slowOpThresholdMs: 100
-    mode: "{{ mongodb_profiling_mode }}"
-
-setParameter:
-    notablescan: {{ mongodb_no_table_scan_mode }}
+# The Linux package init scripts included in the official MongoDB packages depend on specific values for systemLog.path, storage.dbpath, and processManagement.fork.
+# If you modify these settings in the default configuration file, mongod may not start.
 
 systemLog:
-    destination: file
+    path: "{{ mongodb_log_directory }}/mongod.log"
     logAppend: true
-    timeStampFormat: "iso8601-utc"
-    path: {{ mongodb_log_directory }}/mongod.log
-
-net:
-  port: {{mongodb_port}}
-  bindIp: 127.0.0.1  # Listen to local interface only, comment to listen on all interfaces.
+    destination: "file"
+    timeStampFormat: "ctime"
 
 processManagement:
-  fork: true
-  pidFilePath: /var/run/mongodb/mongod.pid
+    fork: true
+    pidFilePath: "{{ mongodb_process_directory }}/mongod.pid"
+
+net:
+    port: {{mongodb_port}}
+
+storage:
+    dbPath: "{{ mongodb_storage_directory }}"
+    journal:
+        enabled: true
