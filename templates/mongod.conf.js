@@ -2,22 +2,22 @@
 
 # The Linux package init scripts included in the official MongoDB packages depend on specific values for systemLog.path, storage.dbpath, and processManagement.fork.
 # If you modify these settings in the default configuration file, mongod may not start.
+# For the above reason, we do not allow changing of those values.
 
 systemLog:
-    path: "{{ mongodb_log_directory }}/mongod.log"
+    path: "/var/log/mongodb/mongod.log"
     logAppend: true
     destination: "file"
     timeStampFormat: "ctime"
 
 processManagement:
     fork: true
-    # Not a mistake, we are using the log directory to store the PID file because /var/run/mongodb does not exist on fresh EC2 instances.
-    pidFilePath: "{{ mongodb_log_directory }}/mongod.pid"
+    pidFilePath: "/var/run/mongodb/mongod.pid"
 
 net:
     port: {{mongodb_port}}
 
 storage:
-    dbPath: "{{ mongodb_storage_directory }}"
+    dbPath: "/var/lib/mongo"
     journal:
         enabled: true
