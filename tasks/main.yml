@@ -26,6 +26,13 @@
       force: yes
   when: mongodb_install
 
+- name: Create MongoDB Process Directory
+  become: yes
+  file:
+      path: "{{mongodb_process_directory}}"
+      state: directory
+  when: mongodb_install
+
 - name: Start MongoDB daemon
   become: yes
   service:
