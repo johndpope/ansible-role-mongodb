@@ -11,7 +11,13 @@ TODO
 Role Variables
 --------------
 
-TODO
+* mongodb_install: true
+* mongodb_version: 3.4
+* mongodb_storage_directory: /var/lib/mongo
+* mongodb_log_directory: /var/log/mongodb
+* mongodb_process_directory: /var/run/mongodb
+* mongodb_port: 27017
+
 Dependencies
 ------------
 
