@@ -36,6 +36,7 @@ galaxy_info:
   galaxy_tags:
       - mongodb
       - nosql
+      - mms
 
   dependencies:
     - { role: kurron.base }

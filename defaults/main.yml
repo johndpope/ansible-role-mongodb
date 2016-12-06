@@ -2,3 +2,7 @@
 mongodb_install: true
 mongodb_version: 3.4
 mongodb_port: 27017
+mongodb_agent_install: true
+mongodb_agent_api_key: 00000000000000000000000000000000
+mongodb_agent_mmsBaseURL: https://api-agents.mongodb.com
+mongodb_agent_version: 5.4.2.354-1

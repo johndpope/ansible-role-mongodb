@@ -13,7 +13,7 @@
       name: "mongodb-org"
       state: present
       update_cache: yes
-      disable_gpg_check: yes
+      disable_gpg_check: no
   when: mongodb_install and (ansible_pkg_mgr == "yum")
 
 - name: Install MongoDB Configuration
@@ -33,3 +33,32 @@
       state: restarted
       enabled: yes
   when: mongodb_install
+
+- name: Install MongoDB Monitoring Agent
+  become: yes
+  yum:
+      name: "https://cloud.mongodb.com/download/agent/monitoring/mongodb-mms-monitoring-agent-{{ mongodb_agent_version }}.x86_64.rhel7.rpm"
+      state: present
+      update_cache: no
+      disable_gpg_check: no
+  when: mongodb_agent_install and (ansible_pkg_mgr == "yum")
+
+- name: Install Custom MongoDB Monitoring Agent Configuration
+  become: yes
+  template:
+      src: templates/monitoring-agent.config.j2
+      dest: /etc/mongodb-mms/monitoring-agent.config
+      mode: 0444
+      backup: yes
+      force: yes
+  when: mongodb_agent_install
+
+- name: Enable MongoDB Monitoring Agent
+  become: yes
+  command: systemctl enable mongodb-mms-monitoring-agent.service
+  when: mongodb_agent_install
+
+- name: Start MongoDB Monitoring Agent
+  become: yes
+  command: systemctl restart mongodb-mms-monitoring-agent.service
+  when: mongodb_agent_install

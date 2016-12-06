@@ -17,6 +17,11 @@ Role Variables
 * mongodb_log_directory: /var/log/mongodb
 * mongodb_process_directory: /var/run/mongodb
 * mongodb_port: 27017
+* mongodb_agent_install: true
+* mongodb_agent_api_key: 00000000000000000000000000000000
+* mongodb_agent_mmsBaseURL: https://api-agents.mongodb.com
+* mongodb_agent_version: 5.4.2.354-1
+
 
 Dependencies
 ------------
@@ -29,7 +34,7 @@ Example Playbook
 ```
 - hosts: servers
   roles:
-      - { role: kurron.mongodb }
+      - { role: kurron.mongodb,  mongodb_agent_api_key: 12345 }
 ```
 
 License

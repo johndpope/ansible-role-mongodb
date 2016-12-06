@@ -1,1 +1,1 @@
-remote ansible_ssh_host=54.186.92.171 ansible_ssh_port=22 ansible_ssh_private_key_file=/home/vagrant/Bitbucket/Operations/terraform-asgard-lite/asgard-lite-test.pem
+remote ansible_ssh_host=54.218.250.158 ansible_ssh_port=22 ansible_ssh_private_key_file=/home/vagrant/Bitbucket/Operations/terraform-asgard-lite/asgard-lite-test.pem
