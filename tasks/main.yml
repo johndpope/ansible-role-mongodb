@@ -19,7 +19,7 @@
 - name: Install MongoDB Configuration
   become: yes
   template:
-      src: templates/mongod.conf.js
+      src: templates/mongod.conf.j2
       dest: /etc/mongod.conf
       mode: 0444
       backup: yes
