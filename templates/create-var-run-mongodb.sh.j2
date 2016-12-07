@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# when running in AWS and you restart an instance, the /run/mongodb folder disappears so we have to recreate it a startup
+mkdir /run/mongodb
+chown -R mongod:mongod /run/mongodb

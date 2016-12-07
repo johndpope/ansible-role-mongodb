@@ -1,4 +1,9 @@
 ---
+- name: Determine If We Are Running In AWS
+  become: no
+  set_fact:
+      running_in_aws: ansible_user_id == "ec2-user"
+
 - name: Copy Repository File
   become: yes
   template:
@@ -25,6 +30,39 @@
       backup: yes
       force: yes
   when: mongodb_install
+
+- name: Create Custom MongoDB Systemd Directory
+  become: yes
+  file:
+      path: /etc/systemd/system/mongod.service.d
+      state: directory
+      mode: 0755
+  when: mongodb_install and running_in_aws
+
+- name: Copy Custom MongoDB Systemd Configuration File
+  become: yes
+  template:
+      src: templates/var_run_script.config.j2
+      dest: /etc/systemd/system/mongod.service.d/var_run_script.conf
+      mode: 0444
+      backup: no
+      force: no
+  when: mongodb_install and running_in_aws
+
+- name: Copy Var Run Creation Script
+  become: yes
+  template:
+      src: templates/create-var-run-mongodb.sh.j2
+      dest: /usr/local/bin/create-var-run-mongodb.sh
+      mode: 0544
+      backup: no
+      force: no
+  when: mongodb_install and running_in_aws
+
+- name: Reload Systemd
+  become: yes
+  command: systemctl daemon-reload
+  when: mongodb_install and running_in_aws
 
 - name: Start MongoDB daemon
   become: yes

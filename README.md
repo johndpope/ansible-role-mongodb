@@ -1,7 +1,8 @@
 Role Name
 =========
 
-MongoDB server, initially targetted to RHEL.
+MongoDB server, initially targeted to RHEL. On AWS, we take care of the
+disappearing `/var/run/mongodb` issue.
 
 Requirements
 ------------
