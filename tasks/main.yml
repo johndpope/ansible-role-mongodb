@@ -8,7 +8,7 @@
   become: yes
   template:
         src: templates/mongo-org.repo.j2
-        dest: /etc/yum.repos.d/mongodb-org-3.4.repo
+        dest: "/etc/yum.repos.d/mongodb-org-{{ mongodb_version }}.repo"
   when: mongodb_install and (ansible_pkg_mgr == "yum")
 
 # currently, there is a gpg key mismatch so I'm turning off checking for now
