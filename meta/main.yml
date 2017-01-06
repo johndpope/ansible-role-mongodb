@@ -39,4 +39,4 @@ galaxy_info:
       - mms
 
   dependencies:
-    - { role: kurron.base }
+    - { role: kurron.transparent-huge-pages }

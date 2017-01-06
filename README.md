@@ -2,7 +2,8 @@ Role Name
 =========
 
 MongoDB server, initially targeted to RHEL. On AWS, we take care of the
-disappearing `/var/run/mongodb` issue.
+disappearing `/var/run/mongodb` issue.  We also disable Transparent Huge Pages
+as recommended by MongoDB.
 
 Requirements
 ------------
