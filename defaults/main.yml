@@ -1,7 +1,8 @@
 ---
 mongodb_install: true
-mongodb_version: 3.4.2
+mongodb_version: 3.4
 mongodb_port: 27017
+mongodb_replica_set_name: default-replica-set
 mongodb_agent_install: false
 mongodb_agent_api_key: 00000000000000000000000000000000
 mongodb_agent_mmsBaseURL: https://api-agents.mongodb.com

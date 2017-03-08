@@ -7,7 +7,7 @@
 - name: Copy Repository File
   become: yes
   template:
-        src: templates/mongo-org.repo.j2
+        src: templates/mongo-org-{{ ansible_distribution }}.repo.j2
         dest: "/etc/yum.repos.d/mongodb-org-{{ mongodb_version }}.repo"
   when: mongodb_install and (ansible_pkg_mgr == "yum")
 
@@ -37,7 +37,7 @@
       path: /etc/systemd/system/mongod.service.d
       state: directory
       mode: 0755
-  when: mongodb_install and running_in_aws
+  when: mongodb_install and (ansible_service_mgr == "systemd")
 
 - name: Copy Custom MongoDB Systemd Configuration File
   become: yes
@@ -47,7 +47,7 @@
       mode: 0444
       backup: no
       force: no
-  when: mongodb_install and running_in_aws
+  when: mongodb_install and (ansible_service_mgr == "systemd")
 
 - name: Copy Var Run Creation Script
   become: yes
@@ -57,12 +57,12 @@
       mode: 0544
       backup: no
       force: no
-  when: mongodb_install and running_in_aws
+  when: mongodb_install
 
 - name: Reload Systemd
   become: yes
   command: systemctl daemon-reload
-  when: mongodb_install and running_in_aws
+  when: mongodb_install and (ansible_service_mgr == "systemd")
 
 - name: Start MongoDB daemon
   become: yes
@@ -70,7 +70,15 @@
       name: mongod
       state: restarted
       enabled: yes
-  when: mongodb_install
+  when: mongodb_install and (ansible_service_mgr == "systemd")
+
+- name: Start MongoDB daemon
+  become: yes
+  service:
+      name: mongod
+      state: restarted
+      enabled: yes
+  when: mongodb_install and (ansible_service_mgr == "upstart")
 
 - name: Install Log Rotation Software
   become: yes
