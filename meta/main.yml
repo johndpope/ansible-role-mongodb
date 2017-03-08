@@ -39,4 +39,5 @@ galaxy_info:
       - mms
 
   dependencies:
+    - { role: kurron.os-limits }
     - { role: kurron.transparent-huge-pages }
