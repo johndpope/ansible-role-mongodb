@@ -72,6 +72,32 @@
       enabled: yes
   when: mongodb_install
 
+- name: Install Log Rotation Software
+  become: yes
+  yum:
+      name: "logrotate"
+      state: present
+      update_cache: no
+  when: mongodb_agent_install and (ansible_pkg_mgr == "yum")
+
+- name: Install Log Rotation Software
+  become: yes
+  apt:
+      name: logrotate
+      state: present
+      update_cache: no
+  when: mongodb_agent_install and (ansible_pkg_mgr == "apt")
+
+- name: Copy MongoDB Log Rotation Configuration
+  become: yes
+  template:
+      src: 'templates/log-rotation.j2'
+      dest: '/etc/logrotate.d/mongod'
+      mode: 0444
+      backup: no
+      force: no
+  when: mongodb_install
+
 - name: Install MongoDB Monitoring Agent
   become: yes
   yum:
