@@ -15,7 +15,7 @@
 - name: Install MongoDB
   become: yes
   yum:
-      name: "mongodb-org"
+      name: "mongodb-org-3.2.10"
       state: present
       update_cache: yes
       disable_gpg_check: no
